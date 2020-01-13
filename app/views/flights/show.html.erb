@@ -1,0 +1,15 @@
+<h1>Airline: <%= @flight.airline.name %></h1>
+
+<h2>Flight Info</h2>
+<p><%= @flight.number %></p>
+<p><%= @flight.date %></p>
+<p><%= @flight.time %></p>
+<p><%= @flight.departure_city %></p>
+<p><%= @flight.arrival_city %></p>
+
+<h2>Passenger Manifest</h2>
+<section id="flight-pax">
+  <% @flight.passengers.each do |pax| %>
+    <p><%= pax.name %></p>
+  <% end %>
+</section>
