@@ -1,9 +1,4 @@
-# As a visitor
-# When I visit a passengers show page ('/passengers/:id')
-# I see that passengers name
-# And I see a section of the page that displays all flight numbers of the flights for that passenger
-# And all flight numbers listed link to that flights show page
-
+require 'rails_helper'
 
 RSpec.describe "As a visitor when I visit a passenger show page" do
   before :each do
@@ -34,6 +29,23 @@ RSpec.describe "As a visitor when I visit a passenger show page" do
     within "#pax-flight-list" do
       click_link "#{@sw_flight_1.id}"
       expect(current_path).to eq("/flights/#{@sw_flight_1.id}")
+    end
+  end
+
+  it "shows a form for pax to fill in flight id to add a flight" do
+
+    within "#add-flight-form" do
+      fill_in :flight_id, with: "#{@sw_flight_2.id}"
+      click_button "Add Flight"
+    end
+  end
+
+  it "shows all added flights to the pax show page" do
+    expect(current_path).to eq("/passengers/#{@pax_1.id}")
+    within "#pax-flight-list" do
+      expect(page).to have_content("#{@sw_flight_2.id}")
+      expect(page).to have_content("#{@sw_flight_1.id}")
+      expect(page).to have_content("#{@sw_flight_3.id}")
     end
   end
 end

@@ -3,4 +3,8 @@ class Passenger < ApplicationRecord
 
   has_many :passenger_flights
   has_many :flights, through: :passenger_flights
+
+  # def add_flight(flight)
+  #   pax.flights << flight
+  # end
 end
